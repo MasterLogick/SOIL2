@@ -29,17 +29,16 @@ jobs:
         cd make/linux
         make all
         cd ../..
-        ls -ali lib/linux
-    - name: Save static linux build
+    - name: Save static build
       uses: actions/upload-artifact@v3
       with:
         name: linux-build-static
-        path: lib/linux/libsoil2-static-lib.a
-    - name: Save shared linux build
+        path: lib/linux/libsoil2-debug.a
+    - name: Save shared build
       uses: actions/upload-artifact@v3
       with:
         name: linux-build-shared
-        path: lib/linux/libsoil2-shared-lib.so
+        path: lib/linux/libsoil2-debug.so
   MacOS:
     runs-on: macos-latest
     steps:
@@ -54,7 +53,16 @@ jobs:
       run: |
         ./premake5 gmake2
         make -C make/macosx/ -j`nproc` all
-        ls lib/macosx
+    - name: Save static build
+      uses: actions/upload-artifact@v3
+      with:
+        name: macosx-build-static
+        path: lib/macosx/libsoil2-debug.a
+    - name: Save shared build
+      uses: actions/upload-artifact@v3
+      with:
+        name: macosx-build-shared
+        path: lib/macosx/libsoil2-debug.dylib
   Windows:
     runs-on: windows-latest
     env:
@@ -74,4 +82,13 @@ jobs:
       shell: cmd
       run: |
         "%MSBUILD_PATH%\MSBuild.exe" .\make\windows\SOIL2.sln -m
-        dir lib/windows
+    - name: Save static build
+      uses: actions/upload-artifact@v3
+      with:
+        name: windows-build-static
+        path: lib/windows/libsoil2-debug.a
+    - name: Save shared build
+      uses: actions/upload-artifact@v3
+      with:
+        name: windows-build-shared
+        path: lib/windows/libsoil2-debug.dll
