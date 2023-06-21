@@ -27,7 +27,7 @@ jobs:
       run: |
         ./premake5 gmake2
         cd make/linux
-        make all
+        make config=release
         cd ../..
     - name: Save static
       uses: actions/upload-artifact@v3
@@ -47,7 +47,7 @@ jobs:
     - name: Build
       run: |
         ./premake5 gmake2
-        make -C make/macosx/ -j`nproc` all
+        make -C make/macosx/ -j`nproc` config=release 
     - name: Save build
       uses: actions/upload-artifact@v3
       with:
@@ -71,7 +71,7 @@ jobs:
     - name: Build
       shell: cmd
       run: |
-        "%MSBUILD_PATH%\MSBuild.exe" .\make\windows\SOIL2.sln -m
+        "%MSBUILD_PATH%\MSBuild.exe" .\make\windows\SOIL2.sln -m /p:Configuration=Release 
     - name: Save build
       uses: actions/upload-artifact@v3
       with:
