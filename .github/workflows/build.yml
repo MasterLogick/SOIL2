@@ -34,7 +34,7 @@ jobs:
         cd make/linux
         make config=release_x86_64
         cd ../..
-    - name: Save static
+    - name: Save artifact
       uses: actions/upload-artifact@v3
       with:
         name: linux-build
@@ -55,7 +55,7 @@ jobs:
       run: |
         ./premake5 gmake2
         make -C make/macosx/ -j`nproc` config=release_x86_64 
-    - name: Save build
+    - name: Save artifact
       uses: actions/upload-artifact@v3
       with:
         name: macosx-build
@@ -81,7 +81,7 @@ jobs:
       shell: cmd
       run: |
         "%MSBUILD_PATH%\MSBuild.exe" .\make\windows\SOIL2.sln -m /p:Configuration=Release 
-    - name: Save build
+    - name: Save artifact
       uses: actions/upload-artifact@v3
       with:
         name: windows-build
@@ -107,7 +107,7 @@ jobs:
       id: pack
       run: |
         zip -r build.zip linux windows macosx
-        echo "date=$(date \"+%Y-%m-%d\")" >> "$GITHUB_OUTPUT"
+        echo date=$(date "+%Y-%m-%d") >> "$GITHUB_OUTPUT"
     - name: Tag release
       uses: tvdias/github-tagger@v0.0.1
       with:
