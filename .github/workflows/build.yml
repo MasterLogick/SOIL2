@@ -9,6 +9,9 @@ jobs:
   Linux:
     runs-on: ubuntu-22.04
     steps:
+    - uses: actions/checkout@v2
+      with:
+        repository: 'SpartanJ/SOIL2'
     - name: Install dependencies
       run: |
         sudo add-apt-repository universe
@@ -23,8 +26,6 @@ jobs:
         sudo update-alternatives --set c++ /usr/bin/g++
         sudo update-alternatives --config gcc
         sudo update-alternatives --config g++
-        git clone https://github.com/SpartanJ/SOIL2
-        cd SOIL2
         wget https://github.com/premake/premake-core/releases/download/v5.0.0-alpha15/premake-5.0.0-alpha15-linux.tar.gz
         tar xvzf premake-5.0.0-alpha15-linux.tar.gz
     - name: Build
@@ -42,12 +43,12 @@ jobs:
     runs-on: macos-latest
     steps:
     - uses: actions/checkout@v2
+      with:
+        repository: 'SpartanJ/SOIL2'    
     - name: Install dependencies
       run: |
         brew install wget
         brew install SDL2
-        git clone https://github.com/SpartanJ/SOIL2
-        cd SOIL2
         wget https://github.com/premake/premake-core/releases/download/v5.0.0-alpha15/premake-5.0.0-alpha15-macosx.tar.gz
         tar -xzf premake-5.0.0-alpha15-macosx.tar.gz
     - name: Build
@@ -65,11 +66,11 @@ jobs:
       MSBUILD_PATH: C:\Program Files\Microsoft Visual Studio\2022\Enterprise\MSBuild\Current\Bin\
     steps:
     - uses: actions/checkout@v2
+      with:
+        repository: 'SpartanJ/SOIL2'
     - name: Install dependencies
       shell: powershell
       run: |
-        git clone https://github.com/SpartanJ/SOIL2
-        cd SOIL2
         Invoke-WebRequest -Uri "https://github.com/premake/premake-core/releases/download/v5.0.0-beta1/premake-5.0.0-beta1-windows.zip" -OutFile "premake-5.0.0-beta1-windows.zip"
         Expand-Archive -DestinationPath . -Path premake-5.0.0-beta1-windows.zip
     - name: Create project
