@@ -29,9 +29,7 @@ jobs:
         cd make/linux
         make all
         cd ../..
-        ls -ali
-        ls -ali lib
-        ls -ali linux
+        ls -ali lib/linux
     - name: Save static linux build
       uses: actions/upload-artifact@v3
       with:
@@ -56,6 +54,7 @@ jobs:
       run: |
         ./premake5 gmake2
         make -C make/macosx/ -j`nproc` all
+        ls lib/macosx
   Windows:
     runs-on: windows-latest
     env:
@@ -75,3 +74,4 @@ jobs:
       shell: cmd
       run: |
         "%MSBUILD_PATH%\MSBuild.exe" .\make\windows\SOIL2.sln -m
+        dir lib/windows
