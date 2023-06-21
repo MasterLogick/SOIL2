@@ -1,4 +1,4 @@
-name: build
+name: night releases
 
 on:
   workflow_dispatch:
