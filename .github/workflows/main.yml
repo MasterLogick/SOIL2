@@ -28,6 +28,16 @@ jobs:
         ./premake5 gmake2
         cd make/linux
         make all
+    - name: Save static linux build
+      uses: actions/upload-artifact@v3
+      with:
+        name: linux-build-static
+        path: lib/linux/libsoil2-static-lib.a
+    - name: Save shared linux build
+      uses: actions/upload-artifact@v3
+      with:
+        name: linux-build-shared
+        path: lib/linux/libsoil2-shared-lib.so
   MacOS:
     runs-on: macos-latest
     steps:
