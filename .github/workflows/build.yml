@@ -9,7 +9,6 @@ jobs:
   Linux:
     runs-on: ubuntu-22.04
     steps:
-    - uses: actions/checkout@v2
     - name: Install dependencies
       run: |
         sudo add-apt-repository universe
@@ -28,6 +27,8 @@ jobs:
         tar xvzf premake-5.0.0-alpha15-linux.tar.gz
     - name: Build
       run: |
+        git clone https://github.com/SpartanJ/SOIL2
+        cd SOIL2
         ./premake5 gmake2
         cd make/linux
         make config=release_x86_64
@@ -49,7 +50,9 @@ jobs:
         tar -xzf premake-5.0.0-alpha15-macosx.tar.gz
     - name: Build
       run: |
-        ./premake5 gmake2
+        git clone https://github.com/SpartanJ/SOIL2
+        cd SOIL2
+        ../premake5 gmake2
         make -C make/macosx/ -j`nproc` config=release_x86_64 
     - name: Save build
       uses: actions/upload-artifact@v3
@@ -70,7 +73,9 @@ jobs:
     - name: Create project
       shell: powershell
       run: |
-        ./premake5.exe --windows-vc-build vs2022
+        git clone https://github.com/SpartanJ/SOIL2
+        cd SOIL2
+        ../premake5.exe --windows-vc-build vs2022
     - name: Build
       shell: cmd
       run: |
