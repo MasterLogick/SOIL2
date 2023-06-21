@@ -1,6 +1,9 @@
 name: build
 
-on: [push, pull_request, workflow_dispatch]
+on:
+  workflow_dispatch:
+  schedule:
+  - cron: "0 0 * * 1"
 
 jobs:
   Linux:
