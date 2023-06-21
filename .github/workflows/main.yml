@@ -28,6 +28,10 @@ jobs:
         ./premake5 gmake2
         cd make/linux
         make all
+        cd ../..
+        ls -ali
+        ls -ali lib
+        ls -ali linux
     - name: Save static linux build
       uses: actions/upload-artifact@v3
       with:
