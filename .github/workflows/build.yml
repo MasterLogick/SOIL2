@@ -99,7 +99,7 @@ jobs:
       id: create_release
       uses: actions/create-release@v1
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+        GITHUB_TOKEN: ${{ secrets.RELEASE_KEY }} # This token is provided by Actions, you do not need to create your own token
       with:
         tag_name: ${{ github.ref }}
         release_name: Build ${{ github.ref }}
@@ -119,7 +119,7 @@ jobs:
     - name: Publish release
       uses: StuYarrow/publish-release@v1.1.2
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.RELEASE_KEY }}
       with:
         id: ${{ steps.create_release.outputs.id }}
       
